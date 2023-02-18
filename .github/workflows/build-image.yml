@@ -1,16 +1,21 @@
 name: Create and publish Docker image
 
 on:
-  push:
-    branches: ['main']
+  workflow_dispatch:
+    inputs:
+      toolchain:
+        description: 'rust toolchain version'
+        required: true
+        default: 'stable'
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  RUST_VERSION: 1.67.1
+  RUST_VERSION: ${{ github.event.inputs.toolchain }}
 
 jobs:
-  build-and-push-image:
+  build:
+    name: Build ${{ github.event.inputs.toolchain }} ${{ matrix.target.arch }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,6 +43,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup QEMU
+        if: matrix.target.arch != 'amd64'
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Build and push Docker image
         run: |
