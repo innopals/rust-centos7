@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["aarch", "multiarch"]
+  "cSpell.words": [
+    "aarch",
+    "buildx",
+    "multiarch",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "softprops",
+    "Swatinem"
+  ]
 }
