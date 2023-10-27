@@ -148,6 +148,6 @@ Create an issue, the workflow is currently triggered manually.
 
 `openssl-dev` not included in the builder; if you're trying to build with openssl, use the vendored version by adding the following dependency in your `Cargo.toml`:
 
-```
+```toml
 openssl = { version = "0.10.45", features = ["vendored"] }
 ```
